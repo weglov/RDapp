@@ -7,13 +7,13 @@
                      refreshing-icon="ion-loading-c">
                      
       </ion-refresher>
-    <ion-list>
-      <ion-item ng-repeat="item in items  | filter:isMo | orderBy: 'node.field_times'" ng-href="#/app/cell/{{ item.node.nid }}" class="item item-thumbnail-left">
+    <ion-list ng-repeat="item in items  | filter:isMo | orderBy: 'node.field_times'">
+      <ion-item class="item item-thumbnail-left" ng-model="collapsed" ng-click="collapsed=!collapsed"> 
       <img ng-src="{{ item.node.field_photo }}">
           <h2>{{ item.node.field_rstyle }}
           </h2>
           <h4><i class="ion-ios7-stopwatch-outline"></i>&nbsp;{{ item.node.field_times }} | {{ item.node.field_day }}</h4>
-          <h3><i class="ion-ios7-location-outline"></i>&nbsp;&nbsp;{{ item.node.field_center }}</h3>
+          <h3 ng-show="collapsed"><i class="ion-ios7-location-outline"></i>&nbsp;&nbsp;{{ item.node.field_center }}</h3>
       </ion-item>
     </ion-list>
   </ion-content>
