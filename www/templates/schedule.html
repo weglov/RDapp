@@ -1,0 +1,20 @@
+<ion-view title="Расписание">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+        <ion-refresher on-refresh="doRefresh()"
+                     refreshing-icon="ion-loading-c">
+                     
+      </ion-refresher>
+    <ion-list>
+      <ion-item ng-repeat="item in items  | filter:isMo | orderBy: 'node.field_times'" ng-href="#/app/cell/{{ item.node.nid }}" class="item item-thumbnail-left">
+      <img ng-src="{{ item.node.field_photo }}">
+          <h2>{{ item.node.field_rstyle }}
+          </h2>
+          <h4><i class="ion-ios7-stopwatch-outline"></i>&nbsp;{{ item.node.field_times }} | {{ item.node.field_day }}</h4>
+          <h3><i class="ion-ios7-location-outline"></i>&nbsp;&nbsp;{{ item.node.field_center }}</h3>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
