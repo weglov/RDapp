@@ -44,19 +44,37 @@ angular.module('starter.controllers', [])
     $http.jsonp(url).success(function(data) {
         $scope.items = data;
     }).error(function(data) {
-        alert("У вас проблеммы с интернетом")
+        alert("Перезагрузите приложение")
     });  
 
+    $scope.toggle = true;
     $scope.doRefresh = function() {
     $http.jsonp(url).success(function(data) {
         $scope.items = data;
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
-    $scope.isMo = function(item) {
-    return item.node.field_day === "\u041f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a";
+  $scope.isPn = function(item) {
+    return item.node.field_day_1 === "1";
   };
-
+  $scope.isVt = function(item) {
+    return item.node.field_day_1 === "2";
+  };
+  $scope.isSr = function(item) {
+    return item.node.field_day_1 === "3";
+  };
+  $scope.isCt = function(item) {
+    return item.node.field_day_1 === "4";
+  };
+  $scope.isPt = function(item) {
+    return item.node.field_day_1 === "5";
+  };
+  $scope.isSb = function(item) {
+    return item.node.field_day_1 === "6";
+  };
+  $scope.isVsk = function(item) {
+    return item.node.field_day_1 === "7";
+  };
 
     
 });

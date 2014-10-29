@@ -1,1 +1,17 @@
-/* Empty. Add your own CSS if you like */
+.sample-show-hide {
+  padding:10px;
+  border:1px solid black;
+  background:white;
+  margin-top: 20px;
+}
+
+.sample-show-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.sample-show-hide.ng-hide {
+  opacity:0;
+  height: 1;
+  margin-top: 0px;
+}

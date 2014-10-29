@@ -2,18 +2,43 @@
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
+<div class="tabs-striped tabs-icon-top tabs-top tabs-background-positive tabs-light">
+    <div class="tabs">
+      <a class="tab-item" ng-click="myFilter = isPn">
+        Пн
+      </a>
+      <a class="tab-item" ng-click="myFilter = isVt">
+        Вт
+      </a>
+      <a class="tab-item" ng-click="myFilter = isSr">
+        Ср
+      </a>
+      <a class="tab-item" ng-click="myFilter = isCt">
+        Чт
+      </a>
+      <a class="tab-item" ng-click="myFilter = isPt">
+        Пт
+      </a>
+      <a class="tab-item" ng-click="myFilter = isSb">
+        Сб
+      </a>
+      <a class="tab-item" ng-click="myFilter = isVsk">
+        Вск
+      </a>
+    </div>
+  </div>
   <ion-content class="has-header">
         <ion-refresher on-refresh="doRefresh()"
                      refreshing-icon="ion-loading-c">
                      
       </ion-refresher>
-    <ion-list ng-repeat="item in items  | filter:isMo | orderBy: 'node.field_times'">
-      <ion-item class="item item-thumbnail-left" ng-model="collapsed" ng-click="collapsed=!collapsed"> 
+    <ion-list ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'">
+      <ion-item class="item item-thumbnail-left" ng-click="toggle=!toggle" > 
       <img ng-src="{{ item.node.field_photo }}">
           <h2>{{ item.node.field_rstyle }}
           </h2>
           <h4><i class="ion-ios7-stopwatch-outline"></i>&nbsp;{{ item.node.field_times }} | {{ item.node.field_day }}</h4>
-          <h3 ng-show="collapsed"><i class="ion-ios7-location-outline"></i>&nbsp;&nbsp;{{ item.node.field_center }}</h3>
+          <ion-item class="sample-show-hide" ng-hide="toggle" ><i class="ion-ios7-location-outline"></i>&nbsp;&nbsp;{{ item.node.field_center }}</ion-item>
       </ion-item>
     </ion-list>
   </ion-content>
