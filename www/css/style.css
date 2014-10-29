@@ -1,17 +1,36 @@
 .sample-show-hide {
-  padding:10px;
+padding: 4px;
+
   border:1px solid black;
   background:white;
-  margin-top: 20px;
+  -webkit-transform: translate3d(0px, 6px, 0px) scale(1);
+
 }
 
 .sample-show-hide {
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
+  -webkit-transition:all linear 0.2s;
+  transition:all linear 0.2s;
 }
 
 .sample-show-hide.ng-hide {
   opacity:0;
   height: 1;
   margin-top: 0px;
+    -webkit-transform: translate3d(0px, 0px, 0px) scale(1);
+
+}
+
+.pane .has-header {
+top: 92px;
+}
+
+.loading-container .loading {
+	font-size: 55px;
+	padding: 10px;
+	color: #000;
+	background: none;
+}
+.item-thumbnail-left img {
+	border-radius: 140px;
+	-webkit-border-radius: 140px;
 }
