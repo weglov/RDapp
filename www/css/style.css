@@ -20,9 +20,7 @@ padding: 4px;
 
 }
 
-.pane .has-header {
-top: 92px;
-}
+
 
 .loading-container .loading {
 	font-size: 55px;
@@ -34,12 +32,16 @@ top: 92px;
 	border-radius: 140px;
 	-webkit-border-radius: 140px;
 }
+.item {
+  border-width: 1px 0 0 0;
+}
+
 
 /*анимация*/
 
 
-.ng-enter, 
-.ng-leave
+.list .ng-enter, 
+.list .ng-leave
 { 
     -webkit-transition: 400ms cubic-bezier(0.175, 0.885, 0.320, 1.275) all;
     -moz-transition: 400ms cubic-bezier(0.175, 0.885, 0.320, 1.275) all;
@@ -50,16 +52,18 @@ top: 92px;
     display: block;
 } 
  
-.ng-enter.ng-enter-active, 
-.ng-leave {
+.list .ng-enter.ng-enter-active, 
+.list .ng-leave {
     opacity: 1;
-    right: 0;
+    top: 0;
     height: 30px;
+
 }
  
-.ng-leave.ng-leave-active,
-.ng-enter {
+.list .ng-leave.ng-leave-active,
+.list .ng-enter {
     opacity: 0;
-    right: -50px;
+    top: -50px;
     height: 0px;
+
 }

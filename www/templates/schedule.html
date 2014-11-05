@@ -4,32 +4,32 @@
   </ion-nav-buttons>
 <div class="tabs-striped  tabs-top">
     <div class="tabs">
-      <a class="tab-item" ng-click="myFilter = isPn; scrollTop()" ng-class="{active: myFilter == isPn}">
+      <a class="tab-item" ng-click="myFilter = is1; scrollTop()" ng-class="{active: myFilter == is1}">
         Пн
       </a>
-      <a class="tab-item"   ng-click="myFilter = isVt; scrollTop()" ng-class="{active: myFilter == isVt}">
+      <a class="tab-item"   ng-click="myFilter = is2; scrollTop()" ng-class="{active: myFilter == is2}">
         Вт
       </a>
-      <a class="tab-item"  ng-click="myFilter = isSr; scrollTop()" ng-class="{active: myFilter == isSr}">
+      <a class="tab-item"  ng-click="myFilter = is3; scrollTop()" ng-class="{active: myFilter == is3}">
         Ср
       </a>
-      <a class="tab-item" ng-click="myFilter = isCt; scrollTop()" ng-class="{active: myFilter == isCt}">
+      <a class="tab-item" ng-click="myFilter = is4; scrollTop()" ng-class="{active: myFilter == is4}">
         Чт
       </a>
-      <a class="tab-item" ng-click="myFilter = isPt; scrollTop()" ng-class="{active: myFilter == isPt}">
+      <a class="tab-item" ng-click="myFilter = is5; scrollTop()" ng-class="{active: myFilter == is5}">
         Пт
       </a>
-      <a class="tab-item" ng-click="myFilter = isSb" ng-class="{active: myFilter == isSb}">
+      <a class="tab-item" ng-click="myFilter = is6; scrollTop()" ng-class="{active: myFilter == is6}">
         Сб
       </a>
-      <a class="tab-item" ng-click="myFilter = isVsk; scrollTop()" ng-class="{active: myFilter == isVsk}">
+      <a class="tab-item" ng-click="myFilter = isNow; scrollTop()" ng-class="{active: myFilter == is7}">
         Вск
       </a>
 
     </div>
   </div>
 
-  <ion-content class="has-header">
+  <ion-content class="has-header has-tabs-top">
         <ion-refresher on-refresh="doRefresh()"
                      refreshing-icon="ion-loading-c">
                      
@@ -38,6 +38,8 @@
     <ion-list >
       <ion-item ng-animate="'animate'" ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-hide="isHidden"> 
       <img ng-src="{{ item.node.field_photo }}">
+
+      {{isNow}}
           <h2>{{ item.node.field_rstyle }}
           </h2>
           <h2>{{ item.node.field_rteacher }}</h2>

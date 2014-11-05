@@ -49,10 +49,12 @@ angular.module('starter.controllers', [])
     maxWidth: 200,
     showDelay: 0
   });
+
+
 $scope.scrollTop = function() {
     $ionicScrollDelegate.scrollTop();
   };
-  
+
     var url = 'http://ritmo-dance.ru/json.json?callback_shedule=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
     $ionicLoading.hide();   
@@ -70,27 +72,31 @@ $scope.scrollTop = function() {
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
-  $scope.isPn = function(item) {
+
+
+$scope.is1 = function(item) {
     return item.node.field_day_1 === "1";
   };
-  $scope.isVt = function(item) {
+  $scope.is2 = function(item) {
     return item.node.field_day_1 === "2";
   };
-  $scope.isSr = function(item) {
+  $scope.is3 = function(item) {
     return item.node.field_day_1 === "3";
   };
-  $scope.isCt = function(item) {
+  $scope.is4 = function(item) {
     return item.node.field_day_1 === "4";
   };
-  $scope.isPt = function(item) {
+  $scope.is5 = function(item) {
     return item.node.field_day_1 === "5";
   };
-  $scope.isSb = function(item) {
+  $scope.is6 = function(item) {
     return item.node.field_day_1 === "6";
   };
-  $scope.isVsk = function(item) {
+  $scope.is7 = function(item) {
     return item.node.field_day_1 === "7";
   };
 
+  $scope.isNowDay = (new Date()).getDay();
+  $scope.myFilter = eval("$scope.is" + $scope.isNowDay)
     
 });
