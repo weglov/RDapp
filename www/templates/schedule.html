@@ -38,8 +38,6 @@
     <ion-list >
       <ion-item ng-animate="'animate'" ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-hide="isHidden"> 
       <img ng-src="{{ item.node.field_photo }}">
-
-      {{isNow}}
           <h2>{{ item.node.field_rstyle }}
           </h2>
           <h2>{{ item.node.field_rteacher }}</h2>
