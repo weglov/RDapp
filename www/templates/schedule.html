@@ -22,21 +22,21 @@
       <a class="tab-item" ng-click="myFilter = is6; scrollTop()" ng-class="{active: myFilter == is6}">
         Сб
       </a>
-      <a class="tab-item" ng-click="myFilter = isNow; scrollTop()" ng-class="{active: myFilter == is7}">
+      <a class="tab-item" ng-click="myFilter = is7; scrollTop()" ng-class="{active: myFilter == is7}">
         Вск
       </a>
 
     </div>
   </div>
 
-  <ion-content class="has-header has-tabs-top">
+  <ion-content class="has-header has-tabs-top schedule">
         <ion-refresher on-refresh="doRefresh()"
                      refreshing-icon="ion-loading-c">
                      
       </ion-refresher>
 
-    <ion-list >
-      <ion-item ng-animate="'animate'" ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-hide="isHidden"> 
+    <ion-list>
+      <ion-item ng-animate="'animate'" ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left"> 
       <img ng-src="{{ item.node.field_photo }}">
           <h2>{{ item.node.field_rstyle }}
           </h2>

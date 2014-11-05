@@ -28,20 +28,69 @@ padding: 4px;
 	color: #000;
 	background: none;
 }
-.item-thumbnail-left img {
-	border-radius: 140px;
-	-webkit-border-radius: 140px;
+.schedule .item-thumbnail-left img {
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
 }
 .item {
   border-width: 1px 0 0 0;
 }
+.bar.bar-stable.nav-title-slide-ios7 {
+background: #ba2737; /* Old browsers */
+background: -moz-linear-gradient(left,  #ba2737 7%, #680005 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(7%,#ba2737), color-stop(100%,#680005)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #ba2737 7%,#680005 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #ba2737 7%,#680005 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #ba2737 7%,#680005 100%); /* IE10+ */
+background: linear-gradient(to right,  #ba2737 7%,#680005 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ba2737', endColorstr='#680005',GradientType=1 ); /* IE6-9 */
+color: #fff;
+}
+
+.tabs-striped .tabs {
+  background: #440910; /* Old browsers */
+background: -moz-linear-gradient(top,  #440910 0%, #680005 29%, #680005 55%, #680005 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#440910), color-stop(29%,#680005), color-stop(55%,#680005), color-stop(100%,#680005)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #440910 0%,#680005 29%,#680005 55%,#680005 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #440910 0%,#680005 29%,#680005 55%,#680005 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #440910 0%,#680005 29%,#680005 55%,#680005 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #440910 0%,#680005 29%,#680005 55%,#680005 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#440910', endColorstr='#680005',GradientType=0 ); /* IE6-9 */
+color: #FFF;
+}
+.tabs-top.tabs-striped .tab-item.active {
+  border-color: #fff;
+}
+.bar.bar-stable .title {
+  color: #fff;
+}
+.bar-stable .button:hover, .bar-stable .button {
+  color: #fff;
+}
 
 
+
+/*Новости*/
+.news .item-complex .item-content {
+  padding: 16px 16px 16px 106px;
+}
+.news .item h2 {
+  white-space: normal;
+  line-height: 1.3;
+  font-weight: 400;
+}
+.news p {
+  background: red;
+  padding: 2px 2px 2px 5px;
+}
+.bar-stable .button.button-clear.back-button {
+  color: #fff;
+}
 /*анимация*/
 
 
-.list .ng-enter, 
-.list .ng-leave
+.schedule .list .ng-enter, 
+.schedule .list .ng-leave
 { 
     -webkit-transition: 400ms all;
     -moz-transition: 400ms  all;
@@ -52,16 +101,17 @@ padding: 4px;
     display: block;
 } 
  
-.list .ng-enter.ng-enter-active, 
-.list .ng-leave {
+.schedule .list .ng-enter.ng-enter-active, 
+.schedule .list .ng-leave {
     opacity: 1;
-    -webkit-transform: translate3d(0px, 0px, 0px) scale(1);
+    -webkit-transform: translate3d(0px, 0px, 0px);
 
 }
  
-.list .ng-leave.ng-leave-active,
-.list .ng-enter {
+.schedule .list .ng-leave.ng-leave-active,
+.schedule .list .ng-enter {
     opacity: 0;
-     -webkit-transform: translate3d(0px, -50px, 0px) scale(1);
+     -webkit-transform: translate3d(0px, -160px, 0px);
+     h
 
 }

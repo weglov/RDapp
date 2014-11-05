@@ -35,8 +35,27 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('rowCtrl', function($scope, $stateParams) {
+.controller('rowCtrl', function($scope, $stateParams, $http, $ionicLoading) {
                       $scope.item = $stateParams.item;
+  $ionicLoading.show({
+    content: 'Loading',
+    template: '<i class="icon ion-loading-c"></i>',
+    animation: 'fade-in',
+    showBackdrop: false,
+    maxWidth: 200,
+    showDelay: 0
+  });
+
+
+
+    var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'?callback_news=JSON_CALLBACK';
+    $http.jsonp(url).success(function(data) {
+    $ionicLoading.hide();   
+    $scope.items = data;
+    }).error(function(data) {
+        alert("Ошибка")
+    });  
+
                     })
 
 .controller('scheduleCtrl', function($scope, $stateParams, $http, $timeout, $ionicLoading, $ionicScrollDelegate) {
@@ -99,4 +118,33 @@ $scope.is1 = function(item) {
   $scope.isNowDay = (new Date()).getDay();
   $scope.myFilter = eval("$scope.is" + $scope.isNowDay)
     
-});
+})
+
+
+.controller('newsCtrl', function($scope, $stateParams, $http, $timeout, $ionicLoading) {
+  $ionicLoading.show({
+    content: 'Loading',
+    template: '<i class="icon ion-loading-c"></i>',
+    animation: 'fade-in',
+    showBackdrop: false,
+    maxWidth: 200,
+    showDelay: 0
+  });
+
+
+
+    var url = 'http://ritmo-dance.ru/json-news.json?callback_news=JSON_CALLBACK';
+    $http.jsonp(url).success(function(data) {
+    $ionicLoading.hide();   
+    $scope.items = data;
+    }).error(function(data) {
+        alert("Ошибка")
+    });  
+
+    $scope.doRefresh = function() {
+    $http.jsonp(url).success(function(data) {
+        $scope.items = data;
+        $scope.$broadcast('scroll.refreshComplete');
+    });
+  };
+  });
