@@ -39,7 +39,7 @@ angular.module('starter.controllers', [])
                       $scope.item = $stateParams.item;
                     })
 
-.controller('scheduleCtrl', function($scope, $stateParams, $http, $timeout, $ionicLoading) {
+.controller('scheduleCtrl', function($scope, $stateParams, $http, $timeout, $ionicLoading, $ionicScrollDelegate) {
 
   $ionicLoading.show({
     content: 'Loading',
@@ -49,7 +49,9 @@ angular.module('starter.controllers', [])
     maxWidth: 200,
     showDelay: 0
   });
-
+$scope.scrollTop = function() {
+    $ionicScrollDelegate.scrollTop();
+  };
   
     var url = 'http://ritmo-dance.ru/json.json?callback_shedule=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
@@ -59,10 +61,9 @@ angular.module('starter.controllers', [])
   }, 100);
 
     }).error(function(data) {
-        alert("Перезагрузите приложение")
+        alert("Ошибка")
     });  
 
-    $scope.toggle = true;
     $scope.doRefresh = function() {
     $http.jsonp(url).success(function(data) {
         $scope.items = data;

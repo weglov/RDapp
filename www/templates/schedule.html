@@ -4,42 +4,44 @@
   </ion-nav-buttons>
 <div class="tabs-striped  tabs-top">
     <div class="tabs">
-      <a class="tab-item" ng-click="myFilter = isPn" ng-class="{active: myFilter == isPn}">
+      <a class="tab-item" ng-click="myFilter = isPn; scrollTop()" ng-class="{active: myFilter == isPn}">
         Пн
       </a>
-      <a class="tab-item"   ng-click="myFilter = isVt" ng-class="{active: myFilter == isVt}">
+      <a class="tab-item"   ng-click="myFilter = isVt; scrollTop()" ng-class="{active: myFilter == isVt}">
         Вт
       </a>
-      <a class="tab-item"  ng-click="myFilter = isSr" ng-class="{active: myFilter == isSr}">
+      <a class="tab-item"  ng-click="myFilter = isSr; scrollTop()" ng-class="{active: myFilter == isSr}">
         Ср
       </a>
-      <a class="tab-item" ng-click="myFilter = isCt" ng-class="{active: myFilter == isCt}">
+      <a class="tab-item" ng-click="myFilter = isCt; scrollTop()" ng-class="{active: myFilter == isCt}">
         Чт
       </a>
-      <a class="tab-item" ng-click="myFilter = isPt" ng-class="{active: myFilter == isPt}">
+      <a class="tab-item" ng-click="myFilter = isPt; scrollTop()" ng-class="{active: myFilter == isPt}">
         Пт
       </a>
       <a class="tab-item" ng-click="myFilter = isSb" ng-class="{active: myFilter == isSb}">
         Сб
       </a>
-      <a class="tab-item" ng-click="myFilter = isVsk" ng-class="{active: myFilter == isVsk}">
+      <a class="tab-item" ng-click="myFilter = isVsk; scrollTop()" ng-class="{active: myFilter == isVsk}">
         Вск
       </a>
+
     </div>
   </div>
+
   <ion-content class="has-header">
         <ion-refresher on-refresh="doRefresh()"
                      refreshing-icon="ion-loading-c">
                      
       </ion-refresher>
-    <ion-list>
-      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-click="toggle=!toggle" > 
+
+    <ion-list >
+      <ion-item ng-animate="'animate'" ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-hide="isHidden"> 
       <img ng-src="{{ item.node.field_photo }}">
           <h2>{{ item.node.field_rstyle }}
           </h2>
           <h2>{{ item.node.field_rteacher }}</h2>
           <h4><i class="ion-ios7-stopwatch-outline"></i>&nbsp;{{ item.node.field_times }} | {{ item.node.field_day }}</h4>
-          <ion-item class="sample-show-hide" ng-hide="toggle" ><i class="ion-ios7-location-outline"></i>&nbsp;&nbsp;{{ item.node.field_center }}</ion-item>
       </ion-item>
     </ion-list>
   </ion-content>
