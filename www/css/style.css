@@ -146,30 +146,52 @@ color: #FFF;
 
 /*Левое меню*/
 .left__menu {
-  background: #632c4d;
-background: -moz-linear-gradient(left,  #632c4d 0%, #831c51 100%);
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,#632c4d), color-stop(100%,#831c51));
-background: -webkit-linear-gradient(left,  #632c4d 0%,#831c51 100%);
-background: -o-linear-gradient(left,  #632c4d 0%,#831c51 100%);
-background: -ms-linear-gradient(left,  #632c4d 0%,#831c51 100%);
-background: linear-gradient(to right,  #632c4d 0%,#831c51 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#632c4d', endColorstr='#831c51',GradientType=1 );
+background: #470024;
+background: -moz-linear-gradient(45deg,  #470024 0%, #140f10 100%);
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#470024), color-stop(100%,#140f10));
+background: -webkit-linear-gradient(45deg,  #470024 0%,#140f10 100%);
+background: -o-linear-gradient(45deg,  #470024 0%,#140f10 100%);
+background: -ms-linear-gradient(45deg,  #470024 0%,#140f10 100%);
+background: linear-gradient(45deg,  #470024 0%,#140f10 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#470024', endColorstr='#140f10',GradientType=1 );
 
 }
 .left__menu .bar.bar-stable {
   background: none;
+  border: none;
+  height: 130px;
 }
+.left__menu .bar.bar-stable .logo {
+  background: url('../img/logo.png') no-repeat center center;
+  background-size: 109px 90px;
+  height: 130px;
+  }
 .left__menu .bar.bar-stable .title {
 color: #000;
 }
 .left__menu a.item-content {
 
 }
+
+.left__menu .has-header {
+-webkit-transform: translate3d(0px, 90px, 0px) scale(1);
+}
 .left__menu .item-complex .item-content {
   background: none;
 }
+.menu-content {
+  box-shadow: -3px 0px 4px rgba(0, 0, 0, 0.2), 1px 0px 4px rgba(0, 0, 0, 0.2);
+}
 .left__menu .item {
     background: none;
-/*    margin-left: 0px;*/
+    border-bottom: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
     color: #FFF;
+    font-size: 16px;
+}
+.left__menu .item i.icon {
+  font-size: 22px;
+  margin-right: 10px;
+  width: 22px;
+  display: inline-block;
 }
