@@ -36,7 +36,7 @@
       </ion-refresher>
 
     <ion-list>
-      <ion-item ng-animate="'animate'" ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left"> 
+      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left"> 
       <img ng-src="{{ item.node.field_photo }}">
           <h2>{{ item.node.field_rstyle }}
           </h2>

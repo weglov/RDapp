@@ -74,8 +74,9 @@ color: #FFF;
   font-weight: 400;
 }
 .news p {
-  background: red;
-  padding: 2px 2px 2px 5px;
+  background: #D2D2D2;
+  padding: 2px 5px 2px;
+  display: inline;
 }
 .bar-stable .button.button-clear.back-button {
   color: #fff;
@@ -113,6 +114,9 @@ color: #FFF;
 }
 .news__detail__content {
   padding: 0 16px;
+}
+.detail__content {
+  padding: 10px 16px;
 }
 /*анимация*/
 
@@ -189,9 +193,21 @@ color: #000;
     color: #FFF;
     font-size: 16px;
 }
+.col {
+  padding: 0 12px;
+}
 .left__menu .item i.icon {
-  font-size: 22px;
+  font-size: 23px;
   margin-right: 10px;
   width: 22px;
   display: inline-block;
+  padding-top: 14px;
+}
+.list__about i.icon {
+  color: #632C4D;
+  font-size: 28px;
+}
+.box {
+  height: 200px;
+  background: yellow;
 }
