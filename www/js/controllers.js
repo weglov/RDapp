@@ -35,20 +35,20 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('rowCtrl', function($scope, $stateParams, $http, $ionicLoading) {
-                      $scope.item = $stateParams.item;
+.controller('newsdetailCtrl', function($scope, $stateParams, $http, $ionicLoading) {
+                      
   $ionicLoading.show({
     content: 'Loading',
     template: '<i class="icon ion-loading-c"></i>',
     animation: 'fade-in',
     showBackdrop: false,
     maxWidth: 200,
-    showDelay: 0
+    showDelay: 10
   });
 
-
-
-    var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'?callback_news=JSON_CALLBACK';
+$scope.item = $stateParams.item;
+$scope.item = $stateParams.item;
+    var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'&callback_news=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
     $ionicLoading.hide();   
     $scope.items = data;
