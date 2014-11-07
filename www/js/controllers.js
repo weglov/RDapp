@@ -46,10 +46,10 @@ angular.module('starter.controllers', [])
     animation: 'fade-in',
     showBackdrop: false,
     maxWidth: 200,
-    showDelay: 10
+    showDelay: 0
   });
 
-$scope.item = $stateParams.item;
+
 $scope.item = $stateParams.item;
     var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'&callback_news=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
@@ -58,7 +58,6 @@ $scope.item = $stateParams.item;
     }).error(function(data) {
         alert("Ошибка")
     });  
-
                     })
 
 .controller('scheduleCtrl', function($scope, $stateParams, $http, $timeout, $ionicLoading, $ionicScrollDelegate) {
