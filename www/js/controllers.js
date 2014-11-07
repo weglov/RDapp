@@ -71,7 +71,7 @@ $scope.item = $stateParams.item;
     maxWidth: 200,
     showDelay: 0
   });
-
+$scope.toogle = true;
 
 $scope.scrollTop = function() {
     $ionicScrollDelegate.scrollTop();

@@ -36,12 +36,15 @@
       </ion-refresher>
 
     <ion-list>
-      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left"> 
+      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-click="toggle=!toggle"> 
       <img ng-src="{{ item.node.field_photo }}">
           <h2>{{ item.node.field_rstyle }}
           </h2>
           <h2>{{ item.node.field_rteacher }}</h2>
           <h4><i class="ion-ios7-stopwatch-outline"></i>&nbsp;{{ item.node.field_times }} | {{ item.node.field_day }}</h4>
+        <span ng-show="toggle" class="cssSlideUp">
+          {{ item.node.field_rstyle }}
+        </span>
       </ion-item>
     </ion-list>
   </ion-content>

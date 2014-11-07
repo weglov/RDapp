@@ -143,21 +143,27 @@ color: #FFF;
 .schedule .list .ng-leave.ng-leave-active,
 .schedule .list .ng-enter {
     opacity: 0;
-     -webkit-transform: translate3d(0px, -160px, 0px);
+     -webkit-transform: translate3d(0px, -10px, 0px);
      h
 
 }
 
 /*Левое меню*/
 .left__menu {
-background: #470024;
+/*background: #470024;
 background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#470024), color-stop(100%,#140f10));
 background: -webkit-linear-gradient(45deg,  #470024 0%,#140f10 100%);
 background: linear-gradient(45deg,  #470024 0%,#140f10 100%);
-
+*/
+background: url('../img/blur.png');
+background-size: cover;
 }
 .left__menu .item-complex .item-content {
   padding: 16px 0px 0 55px;
+}
+
+.left__menu .item-complex .item-content.activated {
+  background: #470024;
 }
 .left__menu .item-complex .item-content span {
   padding-bottom: 16px;
@@ -167,12 +173,11 @@ background: linear-gradient(45deg,  #470024 0%,#140f10 100%);
 .left__menu .bar.bar-stable {
   background: none;
   border: none;
-  height: 130px;
 }
 .left__menu .bar.bar-stable .logo {
   background: url('../img/logo.png') no-repeat center center;
-  background-size: 109px 90px;
-  height: 130px;
+  background-size: 200px 40px;
+  height: 85px;
   }
 .left__menu .bar.bar-stable .title {
 color: #000;
@@ -182,7 +187,8 @@ color: #000;
 }
 
 .left__menu .has-header {
--webkit-transform: translate3d(0px, 90px, 0px) scale(1);
+-webkit-transform: translate3d(0px, 44px, 0px) scale(1);
+border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 .left__menu .item-complex .item-content {
   background: none;
@@ -203,7 +209,6 @@ color: #000;
 .left__menu .item i.icon {
   font-size: 23px;
   margin-right: 10px;
-  width: 22px;
   display: inline-block;
   padding-top: 14px;
 }
@@ -214,4 +219,25 @@ color: #000;
 .box {
   height: 200px;
   background: yellow;
+}
+
+/*Расписание*/
+
+.cssSlideUp {
+    transition: .5s linear all;
+    height: 40px;
+    overflow: hidden;
+}
+.cssSlideUp.ng-hide {
+    height:0;
+}
+
+.schedule .item-thumbnail-left img {
+  border-radius: 81px;
+  -webkit-border-radius: 81px;
+width: 55px;
+height: 55px;
+}
+.schedule .item-thumbnail-left {
+  padding-left: 80px;
 }
