@@ -5,7 +5,7 @@
 		<img src="{{ item.node.field_image }}">
 	  	<h3><span>{{ item.node.created }}</span>{{ item.node.title }}</h3>
   	</div>
-  	<div class="news__detail__content">
+  	<div class="news__detail__content" ng-bind-html="item.node.body">
     {{ item.node.body }}
      </div>  
   </div>  
