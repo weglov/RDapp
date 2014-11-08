@@ -105,7 +105,7 @@ $scope.is1 = function(item) {
     $http.jsonp(url).success(function(data) {
     $scope.loading = 0;  
     $timeout(function () {
-    $scope.items = data;
+    $scope.newss = data;
     }, 300);
     }).error(function(data) {
         alert("Ошибка")

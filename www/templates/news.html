@@ -8,10 +8,10 @@
                      
       </ion-refresher>
         <ion-list>
-		<ion-item  ng-repeat="item in items" ng-href="#/app/news/{{ item.node.nid }}"  class="item item-thumbnail-left"> 
-				 	 <img src="{{ item.node.field_image }}">  
-      			<h2>{{ item.node.title }}</h2>
-   				<p> {{ item.node.type }}</p> 
+		<ion-item  ng-repeat="news in newss" ng-href="#/app/news/{{ news.node.nid }}"  class="item item-thumbnail-left"> 
+				 	 <img src="{{ news.node.field_image }}">  
+      			<h2>{{ news.node.title }}</h2>
+   				<p> {{ news.node.type }}</p> 
 		      </ion-item>
 		 </ion-list>
     <div class="loading__main" ng-if="loading"><i class="icon ion-loading-c"></i></div>
