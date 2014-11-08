@@ -30,26 +30,24 @@
   </div>
 
   <ion-content class="has-header has-tabs-top schedule">
-  {{ ionicLoading }}
         <ion-refresher on-refresh="doRefresh()"
-                     refreshing-icon="ion-loading-c">
-                     
-      </ion-refresher>
-
+                     refreshing-icon="ion-loading-c">   
+        </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-click="toggle=!toggle"> 
+      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-click="toggleGroup(item)"  ng-class="{active: isGroupShown(item)}"> 
 
       <img ng-src="{{ item.node.field_photo }}">   <h2>{{ item.node.field_rstyle }}
           </h2>
       <div class="time"><div class="clock">{{ item.node.field_times}}</div> <span> {{ item.node.field_level }}</span></div>
          
           <h3><i class="ion-ios7-person-outline"></i>&nbsp;{{ item.node.field_rteacher }} </h3>
-          <span ng-show="toggle" class="cssSlideUp">
+          <span ng-show="isGroupShown(item)" class="cssSlideUp">
           <h3><i class="ion-ios7-information-outline"></i>&nbsp;{{ item.node.field_rstat }}</h3>
           <h3><i class="ion-ios7-keypad-outline"></i>&nbsp;{{ item.node.field_format }}</h3>
           <div ng-if="item.node.field_style_em" class="text"><i class="ion-ios7-lightbulb-outline"></i>&nbsp;{{ item.node.field_style_em }}</div>
         </span>
       </ion-item>
     </ion-list>
+    <div class="loading__main" ng-if="loading"><i class="icon ion-loading-c"></i></div>
   </ion-content>
 </ion-view>

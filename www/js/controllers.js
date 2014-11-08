@@ -36,53 +36,29 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('scheduleCtrl', function($scope, $stateParams, $http, $timeout, $ionicScrollDelegate) {
+    $scope.loading = true;
+    $scope.toggleGroup = function(item) {
+      if ($scope.isGroupShown(item)) {
+        $scope.shownGroup = null;
+      } else {
+        $scope.shownGroup = item;
+      }
+    };
+    $scope.isGroupShown = function(item) {
+      return $scope.shownGroup === item;
+    };
 
-
-.controller('newsdetailCtrl', function($scope, $stateParams, $http, $ionicLoading) {
-                      
-  $ionicLoading.show({
-    content: 'Loading',
-    template: '<i class="icon ion-loading-c"></i>',
-    animation: 'fade-in',
-    showBackdrop: false,
-    maxWidth: 200,
-    showDelay: 0
-  });
-
-
-$scope.item = $stateParams.item;
-    var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'&callback_news=JSON_CALLBACK';
-    $http.jsonp(url).success(function(data) {
-    $ionicLoading.hide();   
-    $scope.items = data;
-    }).error(function(data) {
-        alert("Ошибка")
-    });  
-                    })
-
-.controller('scheduleCtrl', function($scope, $stateParams, $http, $timeout, $ionicLoading, $ionicScrollDelegate) {
-
-  $ionicLoading.show({
-    content: 'Loading',
-    template: '<i class="icon ion-loading-c"></i>',
-    animation: 'fade-in',
-    showBackdrop: false,
-    maxWidth: 200,
-    showDelay: 0
-  });
-$scope.toogle = true;
-
-$scope.scrollTop = function() {
-    $ionicScrollDelegate.scrollTop();
-  };
+    $scope.scrollTop = function() {
+        $ionicScrollDelegate.scrollTop();
+      };
 
     var url = 'http://ritmo-dance.ru/json.json?callback_shedule=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
-    $ionicLoading.hide();   
+    $scope.loading = 0;  
     $timeout(function () {
     $scope.items = data;
-  }, 100);
-
+    }, 300);
     }).error(function(data) {
         alert("Ошибка")
     });  
@@ -123,22 +99,14 @@ $scope.is1 = function(item) {
 })
 
 
-.controller('newsCtrl', function($scope, $stateParams, $http, $timeout, $ionicLoading) {
-  $ionicLoading.show({
-    content: 'Loading',
-    template: '<i class="icon ion-loading-c"></i>',
-    animation: 'fade-in',
-    showBackdrop: false,
-    maxWidth: 200,
-    showDelay: 0
-  });
-
-
-
+.controller('newsCtrl', function($scope, $stateParams, $http, $timeout) {
+    $scope.loading = true;
     var url = 'http://ritmo-dance.ru/json-news.json?callback_news=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
-    $ionicLoading.hide();   
+    $scope.loading = 0;  
+    $timeout(function () {
     $scope.items = data;
+    }, 300);
     }).error(function(data) {
         alert("Ошибка")
     });  
@@ -149,29 +117,35 @@ $scope.is1 = function(item) {
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
-  })
+})
+
+.controller('newsdetailCtrl', function($scope, $stateParams, $http, $timeout) {                     
+    $scope.loading = true;
+    $scope.item = $stateParams.item;
+    var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'&callback_news=JSON_CALLBACK';
+    $http.jsonp(url).success(function(data) {
+    $scope.loading = 0;  
+    $timeout(function () {
+    $scope.items = data;
+    }, 200);
+    }).error(function(data) {
+        alert("Ошибка")
+    });  
+})
 
 .controller('aboutCtrl', function($scope, $ionicSlideBoxDelegate, $ionicModal) {
     $scope.nextSlide = function() {
       $ionicSlideBoxDelegate.next();
     }
-
-  // Form data for the login modal
   $scope.loginData = {};
-
-  // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/rules.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
-
-  // Triggered in the login modal to close it
   $scope.closeRules = function() {
     $scope.modal.hide();
   };
-
-  // Open the login modal
   $scope.rules = function() {
     $scope.modal.show();
   };

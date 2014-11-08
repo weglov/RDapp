@@ -107,13 +107,7 @@ color: #FFF;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
   text-shadow: 1px -1px 0px rgba(0, 0, 0, 0.45);
 }
-.loading-container.active {
-   -webkit-transform: translate3d(0px, 90px, 0px);
-}
 
-.menu-open .loading-container.active {
-   display: none;
-}
 .news__detail__img h3 span {
   display: block;
   font-size: 12px;
@@ -158,9 +152,7 @@ color: #FFF;
 .schedule .list .ng-leave.ng-leave-active,
 .schedule .list .ng-enter {
     opacity: 0;
-     -webkit-transform: translate3d(0px, -10px, 0px);
-     h
-
+     -webkit-transform: translate3d(0px, -50px, 0px);
 }
 
 /*Левое меню*/
@@ -178,8 +170,9 @@ background-size: cover;
 }
 
 .left__menu .item-complex .item-content.activated {
-  background: #470024;
+  background: rgba(0, 0, 0, 0.07);
 }
+
 .left__menu .item-complex .item-content span {
   padding-bottom: 16px;
   display: block;
@@ -222,14 +215,14 @@ border-top: 1px solid rgba(255, 255, 255, 0.07);
   padding: 0 12px;
 }
 .left__menu .item i.icon {
-  font-size: 23px;
+  font-size: 22px;
   margin-right: 10px;
   display: inline-block;
-  padding-top: 14px;
+  padding-top: 15px;
 }
 .list__about i.icon {
   color: #632C4D;
-  font-size: 28px;
+  font-size: 24px;
 }
 .box {
   height: 200px;
@@ -239,7 +232,7 @@ border-top: 1px solid rgba(255, 255, 255, 0.07);
 /*Расписание*/
 
 .cssSlideUp {
-    transition: .2s linear all;
+    transition: 0.09s all linear;
     height: 50px;
     overflow: hidden;
 }
@@ -297,4 +290,52 @@ border-top: 1px solid rgba(255, 255, 255, 0.07);
   width: 12px;
   text-align: center;
   display: inline-block;
+}
+
+/*Лоадер*/
+.loading__main {
+       -webkit-transform: translate3d(0px, 150px, 0px);
+       transform: translate3d(0px, 150px, 0px);
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        align-items: center;
+        -webkit-transition: 0.2s opacity linear;
+        -moz-transition: 0.2s opacity linear;
+        transition: 0.2s opacity linear;
+}
+.loading__main i.icon {
+  font-size: 44px;
+}
+
+
+/*Анимация принт*/
+.schedule .list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.schedule .list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.schedule .item.active, .schedule .item.activated {
+  border-color: #D3D2D2;
+  background-color: #F0F0F0;
+}
+.schedule .list .item.item-accordion.ng-hide-add,
+.schedule .list .item.item-accordion.ng-hide-remove {
+  display: block !important;
 }
