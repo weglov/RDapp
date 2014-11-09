@@ -89,23 +89,22 @@ $scope.is1 = function(item) {
   $scope.is6 = function(item) {
     return item.node.field_day_1 === "6";
   };
-  $scope.is7 = function(item) {
+  $scope.is0 = function(item) {
     return item.node.field_day_1 === "7";
   };
-
   $scope.isNowDay = (new Date()).getDay();
-  $scope.myFilter = eval("$scope.is" + $scope.isNowDay)
-    
+  $scope.myFilter = eval("$scope.is" + $scope.isNowDay)    
 })
 
 
 .controller('newsCtrl', function($scope, $stateParams, $http, $timeout) {
-    $scope.loading = true;
+    $scope.loadingnews = true;
     var url = 'http://ritmo-dance.ru/json-news.json?callback_news=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
-    $scope.loading = 0;  
+    
     $timeout(function () {
-    $scope.newss = data;
+    $scope.loadingnews = 0;  
+    $scope.items = data;
     }, 300);
     }).error(function(data) {
         alert("Ошибка")
@@ -120,14 +119,15 @@ $scope.is1 = function(item) {
 })
 
 .controller('newsdetailCtrl', function($scope, $stateParams, $http, $timeout) {                     
-    $scope.loading = true;
+    $scope.loadingdetail = true;
     $scope.item = $stateParams.item;
     var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'&callback_news=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
-    $scope.loading = 0;  
+    
     $timeout(function () {
+    $scope.loadingdetail = 0;  
     $scope.items = data;
-    }, 200);
+    }, 500);
     }).error(function(data) {
         alert("Ошибка")
     });  
@@ -149,5 +149,9 @@ $scope.is1 = function(item) {
   $scope.rules = function() {
     $scope.modal.show();
   };
+  })
+
+
+.controller('videoCtrl', function($scope, $window) {
 
   })

@@ -22,7 +22,7 @@
       <a class="tab-item" ng-click="myFilter = is6; scrollTop()" ng-class="{active: myFilter == is6}">
         Сб
       </a>
-      <a class="tab-item" ng-click="myFilter = is7; scrollTop()" ng-class="{active: myFilter == is7}">
+      <a class="tab-item" ng-click="myFilter = is0; scrollTop()" ng-class="{active: myFilter == is0}">
         Вс
       </a>
 
@@ -43,7 +43,7 @@
           <h3><i class="ion-ios7-person-outline"></i>&nbsp;{{ item.node.field_rteacher }} </h3>
           <span ng-show="isGroupShown(item)" class="cssSlideUp">
           <h3><i class="ion-ios7-information-outline"></i>&nbsp;{{ item.node.field_rstat }}</h3>
-          <h3><i class="ion-ios7-keypad-outline"></i>&nbsp;{{ item.node.field_format }}</h3>
+          <h3 ng-if="item.node.field_format"><i class="ion-ios7-keypad-outline"></i>&nbsp;{{ item.node.field_format }}</h3>
           <div ng-if="item.node.field_style_em" class="text"><i class="ion-ios7-lightbulb-outline"></i>&nbsp;{{ item.node.field_style_em }}</div>
         </span>
       </ion-item>

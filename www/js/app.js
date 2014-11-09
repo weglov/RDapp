@@ -34,7 +34,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/video",
       views: {
         'menuContent' :{
-          templateUrl: "templates/video.html"
+          templateUrl: "templates/video.html",
+          controller: 'videoCtrl'
         }
       }
     })
@@ -58,7 +59,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.cell', {
-      url: "/news/:item?title",
+      url: "/news/:item",
       views: {
         'menuContent' :{
           templateUrl: "templates/news-detail.html",

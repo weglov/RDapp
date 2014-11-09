@@ -1,4 +1,7 @@
-<ion-view title="Новость">
+<ion-view title="Новость"> 
+   <ion-nav-buttons  ng-if="loadingdetail" side="right">
+        <i class="button button-icon icon ion-loading-d"></i>
+    </ion-nav-buttons>
   <ion-content  ng-repeat="item in items" class="has-header news__detail">
   <div class="content">
   	<div class="news__detail__img">
@@ -9,6 +12,5 @@
     {{ item.node.body }}
      </div>  
   </div>  
-  <div class="loading__main" ng-if="loading"><i class="icon ion-loading-c"></i></div>
   </ion-content>
 </ion-view>
