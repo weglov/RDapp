@@ -1,10 +1,16 @@
-<ion-view title="Видео">
+<ion-view title="Видеоуроки">
   <ion-nav-buttons side="left">
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header">
-<video autoplay controls="true" width='100%' height='100%' src='http://techslides.com/demos/sample-videos/small.mp4' type='video/mp4'></video>
-<h1>Привет брат</h1>
+   <ion-nav-buttons  ng-if="loadingdetail" side="right">
+        <i class="button button-icon icon ion-loading-d"></i>
+    </ion-nav-buttons>
+  <ion-content class="has-header video">
 
+		<ion-item  ng-repeat="item in items" ng-href="#/app/video/{{ item.node.nid }}"  class="item item-thumbnail-left"> 
+				 	 <img src="{{ item.node.field_photo }}">  
+      			<h2>{{ item.node.title }}</h2>
+   				<p> {{ item.node.field_rteacher }}</p> 
+		      </ion-item>
   </ion-content>
 </ion-view>

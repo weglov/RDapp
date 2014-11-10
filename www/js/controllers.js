@@ -101,7 +101,6 @@ $scope.is1 = function(item) {
     $scope.loadingnews = true;
     var url = 'http://ritmo-dance.ru/json-news.json?callback_news=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
-    
     $timeout(function () {
     $scope.loadingnews = 0;  
     $scope.items = data;
@@ -118,15 +117,14 @@ $scope.is1 = function(item) {
   };
 })
 
-.controller('newsdetailCtrl', function($scope, $stateParams, $http, $timeout) {                     
+.controller('newsDetailCtrl', function($scope, $stateParams, $http, $timeout) {                     
     $scope.loadingdetail = true;
     $scope.item = $stateParams.item;
     var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'&callback_news=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
-    
     $timeout(function () {
     $scope.loadingdetail = 0;  
-    $scope.items = data;
+    $scope.data = data[0].node;
     }, 500);
     }).error(function(data) {
         alert("Ошибка")
@@ -152,6 +150,37 @@ $scope.is1 = function(item) {
   })
 
 
-.controller('videoCtrl', function($scope, $window) {
+.controller('videoCtrl', function($scope, $stateParams, $http, $timeout) {
+    $scope.loadingdetail = true;
+    var url = 'http://ritmo-dance.ru/video.json?callback_video=JSON_CALLBACK';
+    $http.jsonp(url).success(function(data) {
+    
+    $timeout(function () {
+    $scope.loadingdetail = 0;  
+    $scope.items = data;
+    }, 300);
+    }).error(function(data) {
+        alert("Ошибка")
+    });  
 
-  })
+    $scope.doRefresh = function() {
+    $http.jsonp(url).success(function(data) {
+        $scope.items = data;
+        $scope.$broadcast('scroll.refreshComplete');
+    });
+  };
+})
+
+.controller('videoDetailCtrl', function($scope, $stateParams, $http, $timeout) {                     
+    $scope.loadingdetail = true;
+    $scope.item = $stateParams.item;
+    var url = 'http://ritmo-dance.ru/video-detail.json?field_refpage_nid=' + $scope.item +'&callback_video=JSON_CALLBACK';
+    $http.jsonp(url).success(function(data) {
+    $timeout(function () {
+    $scope.loadingdetail = 0;  
+    $scope.items = data;
+    }, 500);
+    }).error(function(data) {
+        alert("Ошибка")
+    });
+})

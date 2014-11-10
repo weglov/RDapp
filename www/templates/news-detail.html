@@ -1,15 +1,15 @@
-<ion-view title="Новость"> 
+<ion-view title="{{ data.title }}"> 
    <ion-nav-buttons  ng-if="loadingdetail" side="right">
         <i class="button button-icon icon ion-loading-d"></i>
     </ion-nav-buttons>
-  <ion-content  ng-repeat="item in items" class="has-header news__detail">
-  <div class="content">
+  <ion-content  class="has-header news__detail">
+  <div ng-if="data.body" class="content">
   	<div class="news__detail__img">
-		<img src="{{ item.node.field_image }}">
-	  	<h3><span>{{ item.node.created }}</span>{{ item.node.title }}</h3>
+		<img src="{{ data.field_image }}">
+	  	<h3><span>{{ data.created }}</span>{{ data.title }}</h3>
   	</div>
-  	<div class="news__detail__content" ng-bind-html="item.node.body">
-    {{ item.node.body }}
+  	<div class="news__detail__content" ng-bind-html="data.body">
+    {{ data.body }}
      </div>  
   </div>  
   </ion-content>

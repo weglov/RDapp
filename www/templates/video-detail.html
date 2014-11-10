@@ -1,0 +1,12 @@
+<ion-view title="Видеуроки"> 
+   <ion-nav-buttons  ng-if="loadingdetail" side="right">
+        <i class="button button-icon icon ion-loading-d"></i>
+    </ion-nav-buttons>
+  <ion-content  class="has-header news__detail">
+  <ion-item class="list item item-icon-left" href="{{ item.node.field_video }}" ng-repeat="item in items">
+      <i class="icon ion-play"></i>
+      <h2>{{ item.node.title }}</h2>
+      <p ng-bind-html="item.node.field_video"> </p>
+</ion-item>
+  </ion-content>
+</ion-view>
