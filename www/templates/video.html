@@ -7,10 +7,12 @@
     </ion-nav-buttons>
   <ion-content class="has-header video">
 
-		<ion-item  ng-repeat="item in items" ng-href="#/app/video/{{ item.node.nid }}"  class="item item-thumbnail-left"> 
+		<ion-item  ng-repeat="item in items" ng-href="#/app/video/{{ item.node.nid }}"  class="item"> 
 				 	 <img src="{{ item.node.field_photo }}">  
+      			<div class="info">
       			<h2>{{ item.node.title }}</h2>
-   				<p> {{ item.node.field_rteacher }}</p> 
+   				<p><i class="icon ion-ios7-person-outline"></i>&nbsp;{{ item.node.field_rteacher }}</p>
+   				</div> 
 		      </ion-item>
   </ion-content>
 </ion-view>

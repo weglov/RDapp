@@ -171,9 +171,29 @@ $scope.is1 = function(item) {
   };
 })
 
-.controller('videoDetailCtrl', function($scope, $stateParams, $http, $timeout) {                     
+.controller('videoDetailCtrl', function($scope, $stateParams, $http, $timeout) {
+    $scope.toggleVideo = function(item) {
+      if ($scope.isVideoShown(item)) {
+        $scope.shownVideo = null;
+      } else {
+        $scope.shownVideo = item;
+      }
+    };
+    $scope.isVideoShown = function(item) {
+      return $scope.shownVideo === item;
+    };                     
     $scope.loadingdetail = true;
     $scope.item = $stateParams.item;
+    var url_album = 'http://ritmo-dance.ru/video_album.json?nid=' + $scope.item +'&callback_video=JSON_CALLBACK';
+    $http.jsonp(url_album).success(function(data) {
+    $timeout(function () {
+    $scope.loadingdetail = 0;  
+    $scope.data = data[0].node;
+    }, 500);
+    }).error(function(data) {
+        alert("Ошибка")
+    });
+
     var url = 'http://ritmo-dance.ru/video-detail.json?field_refpage_nid=' + $scope.item +'&callback_video=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
     $timeout(function () {
