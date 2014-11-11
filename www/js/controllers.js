@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -20,16 +20,42 @@ angular.module('starter.controllers', [])
   $scope.login = function() {
     $scope.modal.show();
   };
-
+  var url = 'http://ritmo-dance.ru/style_name.json?callback_style=JSON_CALLBACK';
+    $http.jsonp(url).success(function(data) {
+    $timeout(function () {
+    $scope.styles = data;
+    }, 300);
+    }).error(function(data) {
+        alert("Ошибка")
+    });  
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+        var post = {
+          "key": "JD49LujfpCcYNayT_Pp2Nw",
+          "message": {
+            "subject": "Запись на занятие",
+            "from_email": "viktor@scheglov.pro",
+            "from_name": "Школа танцев APP",
+            "headers": {
+              "Reply-To": "ruscheglov@gmail.com"
+            },
+            "to": ([{
+                    "email": "ruscheglov@gmail.com",
+                    "name": "My Name"
+                  }]),
+            "text": "\nИмя:  " + $scope.loginData.name + "\nТелефон:  " + $scope.loginData.phone +  "\nКуда записать:  " + $scope.loginData.style + "\nПервый раз:  " + ($scope.loginData.toggle ? 'Нет' : 'Да')
+          }
+        };
+          // $http.defaults.headers.common['Authorization'] = '';
+          $http.post('https://mandrillapp.com/api/1.0/messages/send.json', post).
+          success(function(response) {
+               $timeout(function() {
+                $scope.closeLogin();
+              }, 1000);
+          }).
+          error(function(err) {
+            console.log(err);
+          });
   };
    // fff
 
