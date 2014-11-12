@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $filter, $ionicModal, $timeout, $http) {
+.controller('AppCtrl', function($scope, $filter, $ionicModal, $timeout, $http, $ionicLoading) {
   var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
   window.localStorage['data_now'] = angular.toJson(today);
   // Form data for the login modal
@@ -11,6 +11,7 @@ angular.module('starter.controllers', [])
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
+
   });
 
   // Triggered in the login modal to close it
@@ -22,6 +23,10 @@ angular.module('starter.controllers', [])
   $scope.login = function() {
     $scope.modal.show();
   };
+  
+
+  $scope.loginData.toogle =  true;
+  console.log($scope.loginData.toogle)
   var url = 'http://ritmo-dance.ru/style_name.json?callback_style=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
     $timeout(function () {
@@ -29,9 +34,18 @@ angular.module('starter.controllers', [])
     }, 300);
     }).error(function(data) {
         alert("Ошибка")
-    });  
+    }); 
+
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
+    console.log($scope.loginData.toogle)
+    $scope.loadingIndicator = $ionicLoading.show({
+                  content: 'Отправка',
+                  animation: 'fade-in',
+                  showBackdrop: false,
+                  maxWidth: 200,
+                  showDelay: 100
+              });
         var post = {
           "key": "JD49LujfpCcYNayT_Pp2Nw",
           "message": {
@@ -42,17 +56,19 @@ angular.module('starter.controllers', [])
               "Reply-To": "ruscheglov@gmail.com"
             },
             "to": ([{
-                    "email": "ruscheglov@gmail.com",
+                    "email": "rsuscheglov@gmail.com",
                     "name": "My Name"
                   }]),
-            "text": "\nИмя:  " + $scope.loginData.name + "\nТелефон:  " + $scope.loginData.phone +  "\nКуда записать:  " + $scope.loginData.style + "\nПервый раз:  " + ($scope.loginData.toggle ? 'Нет' : 'Да')
+            "text": "\nИмя:  " + $scope.loginData.name + "\nТелефон:  " + $scope.loginData.phone +  "\nКуда записать:  " + $scope.loginData.style + "\nПервый раз:  " + ($scope.loginData.toogle ? 'Да' : 'Нет')
           }
         };
           // $http.defaults.headers.common['Authorization'] = '';
           $http.post('https://mandrillapp.com/api/1.0/messages/send.json', post).
           success(function(response) {
+              $scope.loadingIndicator.hide();
+              alert("Отправленно")
                $timeout(function() {
-                $scope.closeLogin();
+               $scope.closeLogin();
               }, 1000);
           }).
           error(function(err) {
@@ -68,23 +84,18 @@ angular.module('starter.controllers', [])
     // получаем зоголовок
       $http.jsonp('http://ritmo-dance.ru/last_change_schedule.json?type=schedule&callback=JSON_CALLBACK').success(function(data) {
       $scope.timestamp = '"'+ data[0].node.timestamp+'"';
-
       if ($scope.timestamp > (window.localStorage['data_load'])) {
         $scope.doNeedLoad();
       }
             });
 
-
-
     $scope.loading = true;
-
-
-
 
     // проверка на актуальность и загрузка
     var url = 'http://ritmo-dance.ru/json.json?callback_shedule=JSON_CALLBACK';
     if(!angular.isUndefined(window.localStorage["items"])){
     $scope.items = JSON.parse(window.localStorage["items"]);
+    $scope.loadingnews = 0;
     } else {
         $http.jsonp(url).success(function(data) {
         $scope.loading = 0;  
@@ -163,21 +174,34 @@ $scope.is1 = function(item) {
 })
 
 
-.controller('newsCtrl', function($scope, $stateParams, $http, $timeout) {
+.controller('newsCtrl', function($scope, $stateParams, $http, $timeout, $filter) {
     $scope.loadingnews = true;
+
     var url = 'http://ritmo-dance.ru/json-news.json?callback_news=JSON_CALLBACK';
-    $http.jsonp(url).success(function(data) {
-    $timeout(function () {
-    $scope.loadingnews = 0;  
-    $scope.items = data;
-    }, 300);
-    }).error(function(data) {
-        alert("Ошибка")
-    });  
+    if(!angular.isUndefined(window.localStorage["news_items"])){
+    $scope.loadingnews = 0;
+    $scope.items = JSON.parse(window.localStorage["news_items"]);
+    } else {
+      $http.jsonp(url).success(function(data) {
+      $timeout(function () {
+      $scope.loadingnews = 0;  
+      $scope.items = data;
+      loadItems();
+      }, 300);
+      }).error(function(data) {
+          alert("Ошибка")
+      });  
+    }
+    var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
+    function loadItems() {
+        window.localStorage['news_items'] = angular.toJson($scope.items);
+        window.localStorage['news_data_load'] = angular.toJson(today);
+    }
 
     $scope.doRefresh = function() {
     $http.jsonp(url).success(function(data) {
         $scope.items = data;
+        loadItems();
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
@@ -216,22 +240,34 @@ $scope.is1 = function(item) {
   })
 
 
-.controller('videoCtrl', function($scope, $stateParams, $http, $timeout) {
-    $scope.loadingdetail = true;
+.controller('videoCtrl', function($scope, $stateParams, $http, $timeout, $filter) {
+    $scope.loading = true;
     var url = 'http://ritmo-dance.ru/video.json?callback_video=JSON_CALLBACK';
-    $http.jsonp(url).success(function(data) {
-    
-    $timeout(function () {
-    $scope.loadingdetail = 0;  
-    $scope.items = data;
-    }, 300);
-    }).error(function(data) {
-        alert("Ошибка")
-    });  
+    if(!angular.isUndefined(window.localStorage["video_item"])){
+    $scope.loading = 0;
+    $scope.items = JSON.parse(window.localStorage["video_item"]);
+    } else {
+      $http.jsonp(url).success(function(data) {
+      $timeout(function () {
+      $scope.loading = 0;  
+      $scope.items = data;
+      loadItems();
+      }, 300);
+      }).error(function(data) {
+          alert("Ошибка")
+      });  
+    }
+    var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
+    function loadItems() {
+        window.localStorage['video_item'] = angular.toJson($scope.items);
+        window.localStorage['video_data_load'] = angular.toJson(today);
+    }
+
 
     $scope.doRefresh = function() {
     $http.jsonp(url).success(function(data) {
         $scope.items = data;
+        loadItems();
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
