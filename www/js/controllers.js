@@ -1,6 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
+.controller('AppCtrl', function($scope, $filter, $ionicModal, $timeout, $http) {
+  var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
+  window.localStorage['data_now'] = angular.toJson(today);
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -62,8 +64,46 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('scheduleCtrl', function($scope, $stateParams, $http, $timeout, $ionicScrollDelegate) {
+.controller('scheduleCtrl', function($scope, $filter, $stateParams, $http, $timeout, $ionicScrollDelegate) {
+    // получаем зоголовок
+      $http.jsonp('http://ritmo-dance.ru/last_change_schedule.json?type=schedule&callback=JSON_CALLBACK').success(function(data) {
+      $scope.timestamp = '"'+ data[0].node.timestamp+'"';
+
+      if ($scope.timestamp > (window.localStorage['data_load'])) {
+        $scope.doNeedLoad();
+      }
+            });
+
+
+
     $scope.loading = true;
+
+
+
+
+    // проверка на актуальность и загрузка
+    var url = 'http://ritmo-dance.ru/json.json?callback_shedule=JSON_CALLBACK';
+    if(!angular.isUndefined(window.localStorage["items"])){
+    $scope.items = JSON.parse(window.localStorage["items"]);
+    } else {
+        $http.jsonp(url).success(function(data) {
+        $scope.loading = 0;  
+        $timeout(function () {
+        $scope.items = data;
+        loadItems();
+        }, 300);
+        }).error(function(data) {
+            alert("Ошибка")
+        }); 
+    }
+// узнаем время загрузки
+    var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
+    function loadItems() {
+        window.localStorage['items'] = angular.toJson($scope.items);
+        window.localStorage['data_load'] = angular.toJson(today);
+    }
+
+  
     $scope.toggleGroup = function(item) {
       if ($scope.isGroupShown(item)) {
         $scope.shownGroup = null;
@@ -79,23 +119,23 @@ angular.module('starter.controllers', [])
         $ionicScrollDelegate.scrollTop();
       };
 
-    var url = 'http://ritmo-dance.ru/json.json?callback_shedule=JSON_CALLBACK';
-    $http.jsonp(url).success(function(data) {
-    $scope.loading = 0;  
-    $timeout(function () {
-    $scope.items = data;
-    }, 300);
-    }).error(function(data) {
-        alert("Ошибка")
-    });  
-
     $scope.doRefresh = function() {
     $http.jsonp(url).success(function(data) {
-        $scope.items = data;
+        $scope.items = data;        
+        loadItems();
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
-
+    $scope.doNeedLoad = function() {
+    $http.jsonp(url).success(function(data) {
+        $scope.items = data;        
+        loadItems();
+        $scope.needload = true;
+        $timeout(function () {
+        $scope.needload = false;
+        }, 3000);
+    });
+  };
 
 $scope.is1 = function(item) {
     return item.node.field_day_1 === "1";
