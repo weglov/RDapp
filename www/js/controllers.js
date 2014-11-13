@@ -25,8 +25,7 @@ angular.module('starter.controllers', [])
   };
   
 
-  $scope.loginData.toogle =  true;
-  console.log($scope.loginData.toogle)
+  $scope.loginData.toogle =  false;
   var url = 'http://ritmo-dance.ru/style_name.json?callback_style=JSON_CALLBACK';
     $http.jsonp(url).success(function(data) {
     $timeout(function () {
@@ -95,10 +94,10 @@ angular.module('starter.controllers', [])
     var url = 'http://ritmo-dance.ru/json.json?callback_shedule=JSON_CALLBACK';
     if(!angular.isUndefined(window.localStorage["items"])){
     $scope.items = JSON.parse(window.localStorage["items"]);
-    $scope.loadingnews = 0;
+    $scope.loading = false;
     } else {
         $http.jsonp(url).success(function(data) {
-        $scope.loading = 0;  
+        $scope.loading = false;  
         $timeout(function () {
         $scope.items = data;
         loadItems();

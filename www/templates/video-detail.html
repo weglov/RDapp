@@ -4,7 +4,7 @@
     </ion-nav-buttons>
   <ion-content  class="has-header video">
   <div class="item_detail" ng-if="data.field_photo">
-   <img src="{{ data.field_photo }}">  
+   <img ng-src="{{ data.field_photo }}">  
             <div class="info">
             <h2>{{ data.title }}</h2>
           <p><i class="icon ion-ios7-person-outline"></i>&nbsp;{{ data.field_rteacher }} | {{ data.field_rstyle }}</p>

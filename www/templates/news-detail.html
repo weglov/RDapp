@@ -5,7 +5,7 @@
   <ion-content  class="has-header news__detail">
   <div ng-if="data.body" class="content">
   	<div class="news__detail__img">
-		<img src="{{ data.field_image }}">
+		<img ng-src="{{ data.field_image }}">
 	  	<h3><span>{{ data.created }}</span>{{ data.title }}</h3>
   	</div>
   	<div class="news__detail__content" ng-bind-html="data.body">
