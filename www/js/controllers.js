@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $filter, $ionicModal, $timeout, $http, $ionicLoading) {
+.controller('AppCtrl', function($scope, $filter, $ionicModal, $timeout,$cordovaStatusbar, $http, $ionicLoading) {
   var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
   window.localStorage['data_now'] = angular.toJson(today);
   // Form data for the login modal
@@ -13,7 +13,6 @@ angular.module('starter.controllers', [])
     $scope.modal = modal;
 
   });
-
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
@@ -79,7 +78,58 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('scheduleCtrl', function($scope, $filter, $stateParams, $http, $timeout, $ionicScrollDelegate) {
+.controller('scheduleCtrl', function($scope, $filter, $stateParams, $http, $timeout, $ionicScrollDelegate, $cordovaCalendar, $ionicPopup) {
+   $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Don\'t eat that!',
+       template: 'It might taste good'
+     });
+     alertPopup.then(function(res) {
+       console.log('Thank you for not eating my delicious ice cream cone');
+     });
+   };
+  $scope.goData = function(id) {
+
+    var DAY_IN_MS = 24 * 60 * 60 * 1000;
+    var user_select_day = parseInt(id.node.field_day_1) - 1;
+    var today = new Date();
+    var days_offset = today.getDay() - 1;
+    if (days_offset < 0) days_offset = 6;
+    var monday_of_week_tms = today.getTime() - days_offset * DAY_IN_MS;
+    var event_date = monday_of_week_tms + user_select_day * DAY_IN_MS + (user_select_day < days_offset ? 7 * DAY_IN_MS : 0);
+    var event_date_start = new Date(event_date);
+    var minutes = parseInt(id.node.field_times.substr(3,2));
+    var hours = parseInt(id.node.field_times.substr(0,2));
+    event_date_start.setHours(hours);
+    event_date_start.setMinutes(minutes);
+    event_date_start.setSeconds(0);
+    var event_date_end = new Date(event_date_start.toString());
+    event_date_end.setHours(hours + 1);
+    event_date_end.setMinutes(minutes);
+    event_date_end.setSeconds(0);
+    console.log(event_date_start);
+    console.log(event_date_end);
+
+    $cordovaCalendar.createEvent({
+    title: id.node.field_rstyle + ' c ' + id.node.field_rteacher,
+    location: id.node.field_center,
+    notes: 'Занятие будет проходить: '+ id.node.field_center + '\nНачало в ' + id.node.field_times + '\nПреподает: ' + id.node.field_rteacher,
+    startDate: event_date_start,
+    endDate: event_date_end
+    }).then(function (result) {
+    $ionicPopup.alert({
+       title: 'Готово!',
+       template: 'Занятие сохранено в календарь телефона, мы напомним вам за час до занятия'
+     });
+    }, function (err) {
+      $ionicPopup.alert({
+       title: 'Ошибка',
+       template: 'It might taste good'
+     });
+  });
+  }
+
+
     // получаем зоголовок
       $http.jsonp('http://ritmo-dance.ru/last_change_schedule.json?type=schedule&callback=JSON_CALLBACK').success(function(data) {
       $scope.timestamp = '"'+ data[0].node.timestamp+'"';

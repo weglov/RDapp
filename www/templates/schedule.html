@@ -35,17 +35,18 @@
         </ion-refresher>
     <div class="needload cssSlideUp"  ng-if="needload">Расписание обновлено</div>
     <ion-list>
-      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-click="toggleGroup(item)"  ng-class="{active: isGroupShown(item)}"> 
-
-      <img ng-src="{{ item.node.field_photo }}">   
-
+      <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-click="toggleGroup(item)"  ng-class="{active: isGroupShown(item)}">
+      <img ng-src="{{ item.node.field_photo }}">
       <div class="otmena" ng-if="item.node.field_otmena">{{ item.node.field_otmena }}</div>
-      <h2>{{ item.node.field_rstyle }}
-          </h2>
+      <h2>{{ item.node.field_rstyle }}</h2>
       <div class="time"><div class="clock">{{ item.node.field_times}}</div> <span> {{ item.node.field_level }}</span></div>
          <h3><i class="icon ion-ios7-navigate-outline"></i>&nbsp;{{ item.node.field_center }} </h3>
-          
+
+         <i class="ion-ios7-calendar-outline add_schedule" ng-click="goData(item)">+</i>
+
+
           <span ng-show="isGroupShown(item)" class="cssSlideUp">
+          
           <h3><i class="ion-ios7-person-outline"></i>&nbsp;{{ item.node.field_rteacher }} </h3>
           <h3><i class="ion-ios7-information-outline"></i>&nbsp;{{ item.node.field_rstat }}</h3>
           <h3 ng-if="item.node.field_format"><i class="ion-ios7-keypad-outline"></i>&nbsp;{{ item.node.field_format }}</h3>
