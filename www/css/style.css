@@ -54,10 +54,12 @@ box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.29);
 
 .tabs-striped .tabs {
   background: #433142;
-color: #FFF;
+  color: #FFF;
+  box-shadow: none;
 }
 .tabs-top.tabs-striped .tab-item.active {
   border-color: #fff;
+  border-width: 0px 0px 3px 0px !important;
 }
 .bar.bar-stable .title {
   color: #fff;
@@ -259,12 +261,12 @@ border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .schedule .item-thumbnail-left img {
-  border-radius: 81px;
-  -webkit-border-radius: 81px;
-  width: 75px;
-  height: 75px;
-  margin-left: 4px;
-  margin-top: 2px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  width: 75px !important;
+  height: 75px !important;
+  border: 1px solid #C2C2C2;
+  background: #EEE;
 }
 .schedule .time {
   position: relative;
@@ -352,9 +354,9 @@ border-top: 1px solid rgba(255, 255, 255, 0.07);
 .schedule .list .item.item-accordion.ng-hide {
   line-height: 0px;
 }
-.schedule .item.active, .schedule .item.activated {
+.schedule .item.active, .schedule .item.activated, .item-complex.active .item-content {
   border-color: #D3D2D2;
-  background-color: #F0F0F0;
+  background-color: #F2F2F2;
 }
 .schedule .list .item.item-accordion.ng-hide-add,
 .schedule .list .item.item-accordion.ng-hide-remove {
@@ -465,4 +467,50 @@ padding: 20px;
   padding: 10px;
   z-index: 200;
   font-weight: 100;
+}
+
+.news .img {
+  padding-bottom: 80px;
+  background: #ffffff url('../img/spiffygif.gif') no-repeat 50% 50%;
+  content: "\f29c";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  max-width: 80px;
+  max-height: 80px;
+  width: 100%;
+}
+.news .img img {
+  position: relative;
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.news__detail__img {
+    padding-bottom: 76%;
+    background: #ffffff url('../img/spiffygif.gif') no-repeat 50% 50%;
+}
+.news__detail__img img {
+  position: absolute;
+}
+.schedule .img {
+  padding-bottom: 75px;
+  background: #ffffff url('../img/spiffygif.gif') no-repeat 50% 50%;
+  content: "\f29c";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  max-width: 75px;
+  max-height: 75px;
+  margin-left: 4px;
+  margin-top: 2px;
+  width: 100%;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}
+.schedule .img img {
+  position: relative;
+  max-width: 75px;
+  max-height: 75px;
 }

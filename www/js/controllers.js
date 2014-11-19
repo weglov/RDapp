@@ -225,7 +225,6 @@ $scope.is1 = function(item) {
 
 .controller('newsCtrl', function($scope, $stateParams, $http, $timeout, $filter) {
     $scope.loadingnews = true;
-
     var url = 'http://ritmo-dance.ru/json-news.json?callback_news=JSON_CALLBACK';
     if(!angular.isUndefined(window.localStorage["news_items"])){
     $scope.loadingnews = 0;
@@ -322,17 +321,26 @@ $scope.is1 = function(item) {
   };
 })
 
-.controller('videoDetailCtrl', function($scope, $stateParams, $http, $timeout) {
-    $scope.toggleVideo = function(item) {
-      if ($scope.isVideoShown(item)) {
-        $scope.shownVideo = null;
-      } else {
-        $scope.shownVideo = item;
+.controller('videoDetailCtrl', function($scope, $stateParams, $http, $timeout, $ionicModal) {
+      $ionicModal.fromTemplateUrl('../templates/video-detail-mp4.html', function(modal){
+        $scope.videoModal = modal;
+      },{
+        scope: $scope,
+        animation: 'slide-in-right'
+      });
+      $scope.closeVideo = function() {
+        $scope.videoModal.hide();
       }
-    };
-    $scope.isVideoShown = function(item) {
-      return $scope.shownVideo === item;
-    };                     
+      $scope.toVideoDetail = function (id) {
+        var item = $scope.items[id];  
+        $scope.activeVideo = {
+          title: id.node.title,
+          video: id.node.field_video
+        }
+        console.log($scope.activeVideo.video)
+        $scope.videoModal.show();
+      }
+                  
     $scope.loadingdetail = true;
     $scope.item = $stateParams.item;
     var url_album = 'http://ritmo-dance.ru/video_album.json?nid=' + $scope.item +'&callback_video=JSON_CALLBACK';
