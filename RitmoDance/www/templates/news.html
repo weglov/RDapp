@@ -1,0 +1,21 @@
+<ion-view title="Акции и Новости">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header news">
+      <ion-refresher on-refresh="doRefresh()"
+                     refreshing-icon="ion-loading-c">
+                     
+      </ion-refresher>
+        <ion-list>
+		<ion-item  ng-repeat="item in items" ng-href="#/app/news/{{ item.node.nid }}"  class="item item-thumbnail-left news"> 
+				 	 <div class="img">
+            <img ng-src="{{ item.node.field_image }}">
+          </div>
+      			<h2>{{ item.node.title }}</h2>
+   				<p> {{ item.node.type }}</p> 
+		      </ion-item>
+		 </ion-list>
+    <div class="loading__main" ng-if="loadingnews"><i class="icon ion-loading-c"></i></div>
+  </ion-content>
+</ion-view>

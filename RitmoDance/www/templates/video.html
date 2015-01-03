@@ -1,0 +1,18 @@
+<ion-view title="Видеоуроки">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+   <ion-nav-buttons  ng-if="loading" side="right">
+        <i class="button button-icon icon ion-loading-d"></i>
+    </ion-nav-buttons>
+  <ion-content class="has-header video">
+
+		<ion-item  ng-repeat="item in items" ng-href="#/app/video/{{ item.node.nid }}"  class="item"> 
+				 	 <img ng-src="{{ item.node.field_photo }}">  
+      			<div class="info">
+      			<h2>{{ item.node.title }}</h2>
+   				<p><i class="icon ion-ios7-person-outline"></i>&nbsp;{{ item.node.field_rteacher }}</p>
+   				</div> 
+		      </ion-item>
+  </ion-content>
+</ion-view>

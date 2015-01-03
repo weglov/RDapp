@@ -1,0 +1,19 @@
+<ion-view title="{{ data.title }}"> 
+   <ion-nav-buttons  ng-if="loadingdetail" side="right">
+        <i class="button button-icon icon ion-loading-d"></i>
+    </ion-nav-buttons>
+  <ion-content  class="has-header video">
+  <div class="item_detail" ng-if="data.field_photo">
+   <img ng-src="{{ data.field_photo }}">  
+            <div class="info">
+            <h2>{{ data.title }}</h2>
+          <p><i class="icon ion-ios7-person-outline"></i>&nbsp;{{ data.field_rteacher }} | {{ data.field_rstyle }}</p>
+        </div>
+  </div>
+  <p class="video__info">{{ data.body }}</p>
+  <ion-item ng-if="item.node.field_video" ng-click="toVideoDetail(item)" class="list item item-icon-left" ng-repeat="item in items" ng-class="{active: isVideoShown(item)}">
+      <i class="icon ion-ios7-play-outline"></i>
+      <h2>{{ item.node.title }} </h2>
+  </ion-item>
+  </ion-content>
+</ion-view>
