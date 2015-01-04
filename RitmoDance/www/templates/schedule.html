@@ -33,7 +33,6 @@
         <ion-refresher on-refresh="doRefresh()"
                      refreshing-icon="ion-loading-c">   
         </ion-refresher>
-    <div class="needload cssSlideUp"  ng-if="needload">Расписание обновлено</div>
     <ion-list>
       <ion-item ng-repeat="item in items | filter:myFilter | orderBy: 'node.field_times'" class="item item-thumbnail-left" ng-click="toggleGroup(item)"  ng-class="{active: isGroupShown(item)}">
       <div class="img"><img ng-src="{{ item.node.field_photo }}"></div>

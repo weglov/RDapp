@@ -68,8 +68,14 @@ box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.29);
   color: #fff;
 }
 
-
-
+.none.item {
+padding: 0;
+margin: 0;
+border: none;
+}
+.video_detail.item {
+  padding: 0 0;
+}
 /*Новости*/
 .news .item-complex .item-content {
   padding: 8px 16px 16px 106px;
@@ -513,4 +519,17 @@ padding: 20px;
   position: relative;
   max-width: 75px;
   max-height: 75px;
+}
+
+.button.add__false {
+  border-color: #D5D5D5;
+  background-color: #E4E4E4;
+  color: #000;
+}
+
+
+.button.add__true {
+  border-color: #09A610;
+  background-color: #5BC51E;
+  color: #FFF;
 }

@@ -11,9 +11,11 @@
         </div>
   </div>
   <p class="video__info">{{ data.body }}</p>
-  <ion-item ng-if="item.node.field_video" ng-click="toVideoDetail(item)" class="list item item-icon-left" ng-repeat="item in items" ng-class="{active: isVideoShown(item)}">
+  <ion-item ng-if="item.node.field_video" class="video_detail" ng-repeat="item in items">
+  <a class="none item item-icon-left" href="{{ item.node.field_video }}" target="_blank">
       <i class="icon ion-ios7-play-outline"></i>
       <h2>{{ item.node.title }} </h2>
+    </a>
   </ion-item>
   </ion-content>
 </ion-view>

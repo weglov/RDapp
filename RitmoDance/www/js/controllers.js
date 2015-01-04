@@ -74,10 +74,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('scheduleCtrl', function($scope, $filter, $stateParams, $http, $timeout, $ionicScrollDelegate, $ionicPopup) {
-   
-
-
+.controller('scheduleCtrl', function($scope, $filter, $stateParams, $http, $timeout, $ionicScrollDelegate, $ionicPopup, $cordovaProgress) {
     // получаем зоголовок
       $http.jsonp('http://ritmo-dance.ru/last_change_schedule.json?type=schedule&callback=JSON_CALLBACK').success(function(data) {
       $scope.timestamp = '"'+ data[0].node.timestamp+'"';
@@ -99,7 +96,10 @@ angular.module('starter.controllers', [])
         loadItems();
         }, 300);
         }).error(function(data) {
-            alert("Ошибка")
+          $cordovaProgress.showText(false, "У Вас проблемы с Интернетом", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
         }); 
     }
 // узнаем время загрузки
@@ -124,9 +124,12 @@ angular.module('starter.controllers', [])
     $scope.scrollTop = function() {
         $ionicScrollDelegate.scrollTop();
       };
-
     $scope.doRefresh = function() {
     $http.jsonp(url).success(function(data) {
+          $cordovaProgress.showText(false, "Обновленно", 'bottom')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
         $scope.items = data;        
         loadItems();
         $scope.$broadcast('scroll.refreshComplete');
@@ -136,10 +139,10 @@ angular.module('starter.controllers', [])
     $http.jsonp(url).success(function(data) {
         $scope.items = data;        
         loadItems();
-        $scope.needload = true;
-        $timeout(function () {
-        $scope.needload = false;
-        }, 3000);
+          $cordovaProgress.showText(false, "Расписание обновленно", 'bottom')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
     });
   };
 
@@ -169,7 +172,7 @@ $scope.is1 = function(item) {
 })
 
 
-.controller('newsCtrl', function($scope, $stateParams, $http, $timeout, $filter) {
+.controller('newsCtrl', function($scope, $stateParams, $http, $timeout, $filter, $cordovaProgress) {
     $scope.loadingnews = true;
     var url = 'http://ritmo-dance.ru/json-news.json?callback_news=JSON_CALLBACK';
     if(!angular.isUndefined(window.localStorage["news_items"])){
@@ -183,7 +186,10 @@ $scope.is1 = function(item) {
       loadItems();
       }, 300);
       }).error(function(data) {
-          alert("Ошибка")
+          $cordovaProgress.showText(false, "У Вас проблемы с Интернетом", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
       });  
     }
     var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
@@ -201,7 +207,7 @@ $scope.is1 = function(item) {
   };
 })
 
-.controller('newsDetailCtrl', function($scope, $stateParams, $http, $timeout, $window) {         
+.controller('newsDetailCtrl', function($scope, $stateParams, $http, $timeout, $window, $cordovaProgress) {         
     $scope.loadingdetail = true;
     $scope.item = $stateParams.item;
     var url = 'http://ritmo-dance.ru/json-news-read.json?nid=' + $scope.item +'&callback_news=JSON_CALLBACK';
@@ -211,7 +217,10 @@ $scope.is1 = function(item) {
     $scope.data = data[0].node;
     }, 500);
     }).error(function(data) {
-        alert("Ошибка")
+          $cordovaProgress.showText(false, "У Вас проблемы с Интернетом", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
     });  
 
 })
@@ -235,7 +244,7 @@ $scope.is1 = function(item) {
   })
 
 
-.controller('videoCtrl', function($scope, $stateParams, $http, $timeout, $filter) {
+.controller('videoCtrl', function($scope, $stateParams, $http, $timeout, $filter, $cordovaProgress) {
     $scope.loading = true;
     var url = 'http://ritmo-dance.ru/video.json?callback_video=JSON_CALLBACK';
     if(!angular.isUndefined(window.localStorage["video_item"])){
@@ -249,7 +258,10 @@ $scope.is1 = function(item) {
       loadItems();
       }, 300);
       }).error(function(data) {
-          alert("Ошибка")
+          $cordovaProgress.showText(false, "У Вас проблемы с Интернетом", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
       });  
     }
     var today = $filter('date')(new Date(),'yyyy-MM-dd HH:mm');
@@ -263,30 +275,16 @@ $scope.is1 = function(item) {
     $http.jsonp(url).success(function(data) {
         $scope.items = data;
         loadItems();
+          $cordovaProgress.showText(false, "Обновленно", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
         $scope.$broadcast('scroll.refreshComplete');
     });
   };
 })
 
-.controller('videoDetailCtrl', function($scope, $stateParams, $http, $timeout, $ionicModal) {
-      $ionicModal.fromTemplateUrl('../templates/video-detail-mp4.html', function(modal){
-        $scope.videoModal = modal;
-      },{
-        scope: $scope,
-        animation: 'slide-in-right'
-      });
-      $scope.closeVideo = function() {
-        $scope.videoModal.hide();
-      }
-      $scope.toVideoDetail = function (id) {
-        var item = $scope.items[id];  
-        $scope.activeVideo = {
-          title: id.node.title,
-          video: id.node.field_video
-        }
-        console.log($scope.activeVideo.video)
-        $scope.videoModal.show();
-      }
+.controller('videoDetailCtrl', function($scope, $stateParams, $http, $timeout, $cordovaProgress) {
                   
     $scope.loadingdetail = true;
     $scope.item = $stateParams.item;
@@ -297,7 +295,10 @@ $scope.is1 = function(item) {
     $scope.data = data[0].node;
     }, 500);
     }).error(function(data) {
-        alert("Ошибка")
+          $cordovaProgress.showText(false, "У Вас проблемы с Интернетом", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
     });
 
     var url = 'http://ritmo-dance.ru/video-detail.json?field_refpage_nid=' + $scope.item +'&callback_video=JSON_CALLBACK';
@@ -307,6 +308,31 @@ $scope.is1 = function(item) {
     $scope.items = data;
     }, 500);
     }).error(function(data) {
-        alert("Ошибка")
+          $cordovaProgress.showText(false, "У Вас проблемы с Интернетом", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000); 
     });
+})
+
+.controller('signCtrl', function($scope, $cordovaDevice, $firebase) {
+  var uuid = $cordovaDevice.getUUID();
+  var device = $cordovaDevice.getDevice();
+  var Base = new Firebase("https://ritmo.firebaseio.com/user");
+  var sync = $firebase(Base);
+  $scope.uuid = uuid;
+  $scope.data = sync.$asObject();
+  // Регистрация нового пользователя
+  $scope.add = function() {
+    Base.push({
+      email: this.profile.mail,      
+      name: this.profile.name,
+      phone: this.profile.phone,
+      uuid: uuid,
+      device: device,
+      bounce: 100,
+      discount: 5,
+    })
+  }
+
 })
