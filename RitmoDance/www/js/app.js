@@ -5,16 +5,16 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'firebase'])
-
+.run(function($cordovaSplashscreen) {
+  setTimeout(function() {
+    $cordovaSplashscreen.hide()
+  }, 2000)
+})
 .config(function ($sceProvider) {
   $sceProvider.enabled(false);
 })
 
-.run(function($cordovaSplashscreen) {
-  setTimeout(function() {
-    $cordovaSplashscreen.hide()
-  }, 1000)
-})
+
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
