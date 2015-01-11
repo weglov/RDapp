@@ -533,3 +533,34 @@ padding: 20px;
   background-color: #5BC51E;
   color: #FFF;
 }
+.sign .row {
+  padding: 0 16px;
+}
+.sign .qr-card {
+  text-align: center;
+  margin: 10px auto;
+  display: block;
+}
+.bar-menu {
+z-index: 2000;
+padding: 16px 49px 16px 16px;
+border: none;
+background: none;
+color: #FFF;
+text-decoration: none;
+border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.sign .icon {
+  color: #E8CB00;
+}
+
+.bar-menu i {
+  font-size: 22px;
+  margin: -5px 16px 0px 0px;
+}
+.bar-menu span {
+font-size: 16px;
+text-decoration: none;
+height: 22px;
+margin-top: -3px;
+}

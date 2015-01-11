@@ -1,8 +1,9 @@
-<ion-view title="Авторизация">     
+<ion-view title="Карта клиента">     
   <ion-nav-buttons side="left">
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header">
+  <ion-content class="has-header sign">
+  <div ng-if="add">
  	 <div class="row">
 <h5>Для накопления баллов и получения скидки, пожалуйста, зарегистрируйтесь:</h5>
 	</div>
@@ -24,7 +25,19 @@
           <button class="button button-block add__{{profile.$valid}}" type="submit" >Зарегистрироваться</button>
      </label>
     </form>
-<img ng-src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=-Jem23FPrhfBATd0Mau8" alt="">
-<h3>{{uuid}}</h3>
+  </div>
+  </div>
+  <div ng-if="info">
+  	 	 <div class="row">
+			<h5>Покажите этот экран нашему сотруднику при оплате Вашего заказа:</h5>
+		 </div>
+<img class="qr-card" ng-if="profile.uuid" ng-src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ profile.uuid }}" alt="">
+<ul class="list">
+	
+    <li class="item item-icon-left" ng-if="profile.bounce"><i class="icon ion-android-star"></i>{{ profile.bounce }}<span class="item-note">Бонусов</span></li>  
+	<li class="item item-icon-left" ng-if="profile.bounce"><i class="icon ion-ribbon-b"></i>{{ profile.discount }}%<span class="item-note">Скидка</span></li> 
+	<li class="item">{{ profile.name }}    |    {{ profile.email }}</li> 
+</ul>
+</div>
   </ion-content>
 </ion-view>

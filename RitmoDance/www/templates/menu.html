@@ -32,12 +32,18 @@
       <ion-item class="item-icon-left" nav-clear menu-close ng-click="login()">
       <i class="icon ion-plus"></i>
       <span>Записаться</span>
-        </ion-item>
-      <ion-item class="item-icon-left" ui-sref-active="current" ui-sref="app.sign" nav-clear menu-close href="#/app/sign">
+      </ion-item>
+<!--       <ion-item class="item-icon-left bar-footer" ui-sref-active="current" ui-sref="app.sign" nav-clear menu-close href="#/app/sign">
       <i class="icon ion-person-stalker"></i>
       <span>Авторизация</span>
-        </ion-item>
+      </ion-item> -->
       </ion-list>
-    </ion-content>
+
+    </ion-content>      
+<a class="bar bar-footer bar-menu"  ui-sref-active="current"  nav-clear menu-close  ui-sref="app.sign" href="#/app/sign">
+      <i class="icon ion-person-stalker"></i>
+      <span>{{textSign}}</span>
+<!--   <button class="button button-clear pull-right">{{textBounce}}</button> -->
+</a>
   </ion-side-menu>
 </ion-side-menus>

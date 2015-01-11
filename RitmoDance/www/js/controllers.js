@@ -70,8 +70,14 @@ angular.module('starter.controllers', [])
 
   };
    // fff
-
-
+   // menu 
+   if(!angular.isUndefined(window.localStorage["SingAddKey"])){
+      $scope.textSign = 'Карта клиента';
+      $scope.textBounce =  window.localStorage["SignDiscount"] + '%'
+    } else {
+      $scope.textSign = 'Авторизоваться';
+      $scope.textBounce = '';
+    }
 })
 
 .controller('scheduleCtrl', function($scope, $filter, $stateParams, $http, $timeout, $ionicScrollDelegate, $ionicPopup, $cordovaProgress) {
@@ -315,24 +321,68 @@ $scope.is1 = function(item) {
     });
 })
 
-.controller('signCtrl', function($scope, $cordovaDevice, $firebase) {
+.controller('signCtrl', function($scope, $timeout, $cordovaDevice, $firebase, $cordovaProgress) {
+  var onComplete = function(error) {
+    if (error) {
+          $cordovaProgress.showText(false, "У Вас проблемы с Интернетом", 'center')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000);      
+    } else {
+      $cordovaProgress.showText(false, "Вы успешно авторизованны, сейчас вы получите вашу накопительную скидку", 'bottom')
+          $timeout(function () {
+            $cordovaProgress.hide()
+          }, 2000);   
+    }
+  };
+
   var uuid = $cordovaDevice.getUUID();
   var device = $cordovaDevice.getDevice();
+
   var Base = new Firebase("https://ritmo.firebaseio.com/user");
   var sync = $firebase(Base);
   $scope.uuid = uuid;
   $scope.data = sync.$asObject();
+  if(!angular.isUndefined(window.localStorage["SingAddKey"])){
+        $scope.add = false;
+        $scope.info = true;
+        var sync = $firebase(Base.child(window.localStorage["SingAddKey"]));
+        var profile = sync.$asObject();
+        $scope.profile = profile;
+        $timeout(function () {
+        window.localStorage['SignDiscount'] = profile.discount
+        window.localStorage['SignBounce'] = profile.bounce
+        }, 1000);
+  } else {
+          var loadinfo = function() {
+        $scope.add = false;
+        $scope.info = true;
+        var sync = $firebase(Base.child(window.localStorage["SingAddKey"]));
+        var profile = sync.$asObject();
+        $scope.profile = profile;
+        $timeout(function () {
+        window.localStorage['SignDiscount'] = profile.discount
+        window.localStorage['SignBounce'] = profile.bounce
+        }, 1000);
+          }
+          $scope.add = function() {
+            var SignAdd = Base.push({
+              email: this.profile.mail,      
+              name: this.profile.name,
+              phone: this.profile.phone,
+              uuid: uuid,
+              device: device,
+              bounce: 100,
+              discount: 5,
+            // });
+            }, onComplete);
+            window.localStorage['SingAddKey'] = SignAdd.key();
+            loadinfo();
+          }
+  }  
+  
+
   // Регистрация нового пользователя
-  $scope.add = function() {
-    Base.push({
-      email: this.profile.mail,      
-      name: this.profile.name,
-      phone: this.profile.phone,
-      uuid: uuid,
-      device: device,
-      bounce: 100,
-      discount: 5,
-    })
-  }
+
 
 })
